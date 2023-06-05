@@ -68,7 +68,17 @@ resource "aws_instance" "chapter_02_instance" {
     http_tokens   = "required"
   }
 
-  user_data = file("init.sh")
+  user_data = <<EOF
+#!/usr/bin/env bash
+
+echo "========================================================================="
+sudo apt-get install tree -y
+sudo mkfs -t ext4 /dev/sdh
+sudo mkdir /mnt/my_ebs_disk
+sudo mount /dev/sdh /mnt/my_ebs_disk
+tree /mnt > /home/ec2-user/contents.txt
+echo "========================================================================="
+EOF
 
   tenancy         = "default"
   //placement_group = aws_placement_group.chapter_02_instance_placement_group.id
