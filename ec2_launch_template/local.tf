@@ -1,3 +1,3 @@
 locals {
-  workspace = "chapter02_launchtemplate_ortolan"
+  workspace = "chapter02_launch_template"
 }
