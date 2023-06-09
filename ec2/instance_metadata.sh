@@ -86,7 +86,7 @@ function other_info() {
 }
 
 function mounted_volumes() {
-  df -ah | grep /dev/sd
+  mount | grep dev
 }
 
 instance_info
@@ -95,3 +95,4 @@ network_info
 other_info
 mounted_volumes
 
+echo "end_of_script"
