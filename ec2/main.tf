@@ -1,4 +1,4 @@
 provider "aws" {
-  profile = "development"
-  alias = "devel"
+  profile = "saa-c03-studies"
+  alias = "studies"
 }
