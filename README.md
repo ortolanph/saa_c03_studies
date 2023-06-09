@@ -6,8 +6,8 @@ Studies from the book **AWS Certified Solutions Architect - Sutdy Guide**.
 
 ### Chapter 2
 
-* EC2
-* EC2 LAUNCH TEMPLATE
+* [EC2](ec2/README.md)
+* [EC2 LAUNCH TEMPLATE](ec2_launch_template/README.md)
 
 ## Chapter 3
 

@@ -1,11 +1,14 @@
 variable "instance_type" {
-  type = string
+  description = "The instance type"
+  type        = string
 }
 
 variable "ami_id" {
-  type = string
+  description = "The AMI id"
+  type        = string
 }
 
 variable "vpc_id" {
-  type = string
+  description = "The VPC id"
+  type        = string
 }
