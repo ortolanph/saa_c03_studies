@@ -40,7 +40,7 @@ resource "aws_security_group" "chapter_02_security_group" {
 }
 
 data "aws_key_pair" "chapter_02_key_pair" {
-  key_name = "chapter_02_key_pair"
+  key_name = "saa_c03_studies"
 }
 
 # Cluster placement groups are not supported by the 't2.micro' instance type

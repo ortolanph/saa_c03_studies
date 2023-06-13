@@ -39,40 +39,25 @@ resource "aws_launch_template" "chapter02_launch_template" {
     }
   }
 
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"
+  }
+
   // Advanced Options
   placement {
     tenancy = "default"
   }
 
   // User data
-  user_data = <<EOF
-#!/usr/bin/env bash
-
-echo "========================================================================="
-sudo apt-get install tree nginx -y
-
-sudo mkfs -t xfs /dev/xvdb
-sudo mkdir -p /data/${local.workspace}_my_volume_b
-sudo mount /dev/xvdb /data/${local.workspace}_my_volume_b
-
-sudo mkfs -t xfs /dev/xvdc
-sudo mkdir -p /data/${local.workspace}_my_volume_c
-sudo mount /dev/xvdc /data/${local.workspace}_my_volume_c
-
-echo "Welcome to the real World" > /data/${local.workspace}_my_volume_b/README.txt
-echo "Welcome to the real World" > /data/${local.workspace}_my_volume_c/README.txt
-
-mount | grep data > index.html
-cp index.html /usr/share/nginx/html
-echo "========================================================================="
-EOF
+  user_data = filebase64("${path.module}/user_data.sh")
 
   // Tags
   tags = {
     Name      = "${local.workspace}_launch_template"
-    version   = aws_launch_template.chapter02_launch_template.default_version
     workspace = local.workspace
   }
+
 }
 
 resource "aws_instance" "chapter02_launch_template_instance" {
