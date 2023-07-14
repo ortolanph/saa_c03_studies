@@ -1,6 +1,6 @@
 // TODO: Define an autoscaling group
 
 provider "aws" {
-  profile = "development"
-  alias = "devel"
+  profile = "saa_c03_studies"
+  alias = "studies"
 }
