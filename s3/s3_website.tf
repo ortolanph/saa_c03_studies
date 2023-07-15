@@ -46,19 +46,28 @@ resource "aws_s3_bucket_policy" "s3_website_bucket_policy" {
 POLICY
 }
 
-resource "aws_s3_bucket_website_configuration" "s3_website_bucket_configuration" {
-  bucket = aws_s3_bucket.s3_website_bucket.id
-
-  index_document {
-    suffix = "index.html"
-  }
-}
-
-resource "aws_s3_object" "dist" {
+resource "aws_s3_object" "s3_website_bucket_objects" {
   for_each = fileset("files/website/", "**/*.*")
 
   bucket = aws_s3_bucket.s3_website_bucket.id
   key    = each.value
   source = "files/website/${each.value}"
   etag   = filemd5("files/website/${each.value}")
+}
+
+
+resource "aws_s3_bucket_website_configuration" "s3_website_bucket_configuration" {
+  depends_on = [
+    aws_s3_bucket.s3_website_bucket,
+    aws_s3_bucket_public_access_block.s3_website_bucket_public_access,
+    aws_s3_bucket_versioning.s3_website_bucket_versioning,
+    aws_s3_bucket_policy.s3_website_bucket_policy,
+    aws_s3_object.s3_website_bucket_objects
+  ]
+
+  bucket = aws_s3_bucket.s3_website_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
 }

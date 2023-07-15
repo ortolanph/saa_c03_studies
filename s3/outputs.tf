@@ -1,12 +1,12 @@
-output  "image_url" {
+output "image_url" {
   value = data.local_file.image_url.content
 }
 
-output  "text_url" {
+output "text_url" {
   value = data.local_file.text_url.content
 }
 
-output  "audio_url" {
+output "audio_url" {
   value = data.local_file.audio_url.content
 }
 
