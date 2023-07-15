@@ -11,5 +11,5 @@ terraform {
 
 provider "aws" {
   profile = "saa_c03_studies"
-  region = "eu-west-1"
+  region  = "eu-west-1"
 }

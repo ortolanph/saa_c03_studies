@@ -80,7 +80,7 @@ echo "Welcome to the real World" > /data/${local.workspace}_my_volume/README.txt
 echo "========================================================================="
 EOF
 
-  tenancy         = "default"
+  tenancy = "default"
   //placement_group = aws_placement_group.chapter_02_instance_placement_group.id
 
   tags = {

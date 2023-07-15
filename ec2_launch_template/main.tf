@@ -2,5 +2,5 @@
 
 provider "aws" {
   profile = "saa_c03_studies"
-  alias = "studies"
+  alias   = "studies"
 }

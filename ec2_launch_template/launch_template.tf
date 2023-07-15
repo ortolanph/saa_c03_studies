@@ -25,7 +25,7 @@ resource "aws_launch_template" "chapter02_launch_template" {
     device_name = "/dev/sdb"
 
     ebs {
-      volume_size = 10
+      volume_size           = 10
       delete_on_termination = true
     }
   }
@@ -34,7 +34,7 @@ resource "aws_launch_template" "chapter02_launch_template" {
     device_name = "/dev/sdc"
 
     ebs {
-      volume_size = 10
+      volume_size           = 10
       delete_on_termination = true
     }
   }
