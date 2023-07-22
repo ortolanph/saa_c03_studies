@@ -19,15 +19,15 @@ Studies from the book **AWS Certified Solutions Architect - Sutdy Guide**.
 
 ## Running the examples
 
-To run the examples you should first make some configurations on AWS and on the configuration files on the local computer.
+To run the examples you should first make some configurations on AWS and on the configuration files on the local
+computer.
 
 ### AWS
 
 On **IAM** create an user. It'll give credentials: an access key and a secret access key.
 
-On **IAM** create a **Terraform** Role and use the policy **AdministratorAccess**. That will give you permission to build every kind of resource that you are allowed to.
-
-
+On **IAM** create a **Terraform** Role and use the policy **AdministratorAccess**. That will give you permission to
+build every kind of resource that you are allowed to.
 
 ### Local Computer
 

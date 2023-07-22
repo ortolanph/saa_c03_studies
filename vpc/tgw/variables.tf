@@ -19,6 +19,6 @@ variable "simple_vpc_route_table_id" {
 }
 
 variable "simple_vpc_cidr" {
-  type = string
+  type        = string
   description = "The CIDR Block from the simple_vpc module VPC"
 }
