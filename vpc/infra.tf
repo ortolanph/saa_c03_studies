@@ -1,11 +1,13 @@
 module "simple_vpc" {
-  source = "./simple"
+  source  = "./simple"
+  version = "1"
 
   workspace = local.workspace
 }
 
 module "transit_gateway" {
-  source = "./tgw"
+  source  = "./tgw"
+  version = "1"
 
   simple_vpc_id             = module.simple_vpc.vpc_id
   simple_vpc_cidr           = module.simple_vpc.vpc_cidr
