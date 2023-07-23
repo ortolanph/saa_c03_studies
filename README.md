@@ -4,18 +4,22 @@ Studies from the book **AWS Certified Solutions Architect - Sutdy Guide**.
 
 ## Chapters
 
-### Chapter 2
+### Chapter 2 - Compute Service
 
 * [EC2](ec2/README.md)
 * [EC2 LAUNCH TEMPLATE](ec2_launch_template/README.md)
 
-## Chapter 3
+## Chapter 3 - AWS Storage
 
 * [S3 Buckets](s3/README.md)
 
-## Chapter 4
+## Chapter 4 - Amazon Virtual Private Cloud (VPC)
 
-* VPCs
+* [VPC](vpc/README.md)
+
+## Chapter 5 - Database Services
+
+* Database Services
 
 ## Running the examples
 
