@@ -122,3 +122,11 @@ resource "aws_internet_gateway" "database_internet_gateway" {
     exam      = "saa_c03"
   }
 }
+
+resource "aws_route" "simple_route" {
+  route_table_id = aws_vpc.db_vpc.main_route_table_id
+
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.database_internet_gateway.id
+}
+

@@ -24,6 +24,8 @@ resource "aws_db_instance" "database" {
   publicly_accessible = "true"
   skip_final_snapshot = "true"
 
+  vpc_security_group_ids = [ var.security_group_id ]
+
   db_subnet_group_name = aws_db_subnet_group.database_subnet_group.name
 
   tags = {

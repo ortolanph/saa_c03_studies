@@ -1,9 +1,9 @@
 variable "rds_username" {
   type        = string
-  description = "The user name to the RDS PostgreSQL database"
+  description = "Type the user name for the RDS PostGRE SQL database"
 }
 
 variable "rds_password" {
   type        = string
-  description = "The password for the RDS PostgreSQL database"
+  description = "Type the password for the RDS PostGRE SQL database"
 }
