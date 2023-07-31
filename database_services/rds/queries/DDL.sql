@@ -10,7 +10,7 @@ CREATE TABLE people (
     postal_code varchar(255),
     phone varchar(255),
     mobile_phone varchar(255),
-    dob date not null,
+    dob timestamp not null,
     age smallint,
     email varchar(255)
 );

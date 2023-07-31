@@ -123,7 +123,7 @@ resource "aws_internet_gateway" "database_internet_gateway" {
   }
 }
 
-resource "aws_route" "simple_route" {
+resource "aws_route" "database_route" {
   route_table_id = aws_vpc.db_vpc.main_route_table_id
 
   destination_cidr_block = "0.0.0.0/0"
