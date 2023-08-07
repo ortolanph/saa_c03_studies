@@ -4,6 +4,7 @@ module "network" {
   workspace = "chapter05"
 }
 
+# Comment this if you don't want RDS with replica
 module "rds" {
   source = "./rds"
 
@@ -12,4 +13,10 @@ module "rds" {
   username          = var.rds_username
   password          = var.rds_password
   workspace         = "chapter05"
+}
+
+module "dynamo" {
+  source = "./dynamodb"
+
+  workspace = "chapter05"
 }

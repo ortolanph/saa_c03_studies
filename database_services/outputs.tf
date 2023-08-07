@@ -17,3 +17,7 @@ output "psql_command_line_inserts" {
 output "psql_command_line_queries" {
   value = module.rds.psql_command_line_queries
 }
+
+output "psql_command_line_connect_replica" {
+  value = module.rds.psql_command_line_connect_replica
+}
