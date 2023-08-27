@@ -2,3 +2,4 @@
 *.tfvars
 .terraform
 *.url
+.idea
