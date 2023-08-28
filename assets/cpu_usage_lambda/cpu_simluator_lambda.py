@@ -12,7 +12,7 @@ class EnvironmentData:
     breaching_min = 70
     breaching_max = 85
 
-    def __init__(self, breaching_chance, breaching_max_points, total_duration, total_duration_minutes, threshold, ):
+    def __init__(self, breaching_chance, breaching_max_points, total_duration_minutes, threshold, ):
         pass
 
 
