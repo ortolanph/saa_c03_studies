@@ -1,45 +1,37 @@
+import random
+import time
 import os
 
+env_vars = {
+    "BREACHING_CHANCE": 0.99,
+    "BREACHING_POINTS_MAX": 20,
+    "TOTAL_DURATION_MINUTES": 10,
+    "THRESHOLD": 70,
+    "NORMAL_MIN": 45,
+    "NORMAL_MAX": 55,
+    "BREACHING_MIN": 70,
+    "BREACHING_MAX": 85,
+}
 
-class EnvironmentData:
-    breaching_chance = 0.99
-    breaching_max_points = 20
-    total_duration = 10
-    # TOTAL_DURATION = 10 * 60
-    threshold = 70
-    normal_min = 45
-    normal_max = 55
-    breaching_min = 70
-    breaching_max = 85
 
-    def __init__(self, breaching_chance, breaching_max_points, total_duration_minutes, threshold, ):
-        pass
+def load_env_values():
+    env_vars["BREACHING_CHANCE"] = float(os.getenv('BREACHING_CHANCE', env_vars["BREACHING_CHANCE"]))
+    env_vars["BREACHING_POINTS_MAX"] = int(os.getenv('BREACHING_POINTS_MAX', env_vars["BREACHING_POINTS_MAX"]))
+    env_vars["TOTAL_DURATION_MINUTES"] = int(os.getenv('TOTAL_DURATION_MINUTES', env_vars["TOTAL_DURATION_MINUTES"]))
+    env_vars["THRESHOLD"] = int(os.getenv('THRESHOLD', env_vars["THRESHOLD"]))
+    env_vars["NORMAL_MIN"] = int(os.getenv('NORMAL_MIN', env_vars["NORMAL_MIN"]))
+    env_vars["NORMAL_MAX"] = int(os.getenv('NORMAL_MAX', env_vars["NORMAL_MAX"]))
+    env_vars["BREACHING_MIN"] = int(os.getenv('BREACHING_MIN', env_vars["BREACHING_MIN"]))
+    env_vars["BREACHING_MIN"] = int(os.getenv('BREACHING_MAX', env_vars["BREACHING_MIN"]))
 
 
 def lambda_handler(event, context):
-    print(os.getenv('HOME_KEY_NOT_EXISTS', '/home/work/python'))
+    load_env_values()
 
 
 if __name__ == '__main__':
     lambda_handler(None, None)
 
-import random
-import time
-
-import matplotlib.pyplot as plt
-
-BREACHING_CHANCE = 0.99
-BREACHING_POINTS_MAX = 20
-
-TOTAL_DURATION = 10 * 60
-
-THRESHOLD = 70
-
-NORMAL_MIN = 45
-NORMAL_MAX = 55
-
-BREACHING_MIN = 70
-BREACHING_MAX = 85
 
 
 def main():
@@ -76,8 +68,6 @@ def main():
         time.sleep(1)
         counter += 1
 
-    plot_graph(timestamps, numeric_values)
-
 
 def generate_cpu_usage(minimum, maximum):
     return int(random.uniform(minimum, maximum))
@@ -92,21 +82,3 @@ def generate_message(current_time, counter, current_value, threshold):
         status = "OVER_THRESHOLD"
 
     return f"{current_time}, {counter}, CPU Usage, {status}, {threshold}, {current_value}"
-
-
-def plot_graph(timestamps, numeric_values):
-    plt.figure(figsize=(20, 12))
-    plt.plot(timestamps, numeric_values, marker='o')
-    plt.axhline(y=70, color='r', linestyle='--', label='Threshold (70)')
-    plt.xlabel('Iteration')
-    plt.ylabel('CPU Usage')
-    plt.title('CPU Usage over Iteration')
-    plt.legend()
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.show()
-
-# if __name__ == "__main__":
-#     peak_counter = 0
-#     start_time = time.time()
-#     main()
