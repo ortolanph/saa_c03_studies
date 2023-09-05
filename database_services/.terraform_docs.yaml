@@ -1,0 +1,54 @@
+formatter: "markdown"
+
+version: ">= 1.4.6, < 1.5.6"
+
+header-from: main.tf
+
+recursive:
+  enabled: false
+  path: modules
+
+sections:
+  show:
+    - all
+
+content: |-
+  # Database Services
+  
+  Creates a PGSQL Instance with a Replica and a DynamoDB.
+  
+  ## RDS instructions
+  
+  asdasdasdasd
+  
+  ## Dynamo client
+  
+  asdsa
+  
+
+output:
+  file: "README.md"
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->    
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: false
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: false
+  html: false
+  indent: 2
+  lockfile: false
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true

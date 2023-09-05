@@ -17,7 +17,7 @@
 #}
 
 module "dynamo" {
-  source = "./dynamodb"
+  source = "modules/dynamodb"
 
   workspace = "chapter05"
 }

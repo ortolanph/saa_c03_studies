@@ -3,7 +3,7 @@ import time
 import os
 
 env_vars = {
-    "BREACHING_CHANCE": 0.99,
+    "BREACHING_THRESHOLD": 0.99,
     "BREACHING_POINTS_MAX": 20,
     "TOTAL_DURATION_MINUTES": 5,
     "THRESHOLD": 70,
@@ -15,7 +15,7 @@ env_vars = {
 
 
 def load_env_values():
-    env_vars["BREACHING_CHANCE"] = float(os.getenv('BREACHING_CHANCE', env_vars["BREACHING_CHANCE"]))
+    env_vars["BREACHING_THRESHOLD"] = float(os.getenv('BREACHING_THRESHOLD', env_vars["BREACHING_THRESHOLD"]))
     env_vars["BREACHING_POINTS_MAX"] = int(os.getenv('BREACHING_POINTS_MAX', env_vars["BREACHING_POINTS_MAX"]))
     env_vars["TOTAL_DURATION_MINUTES"] = int(os.getenv('TOTAL_DURATION_MINUTES', env_vars["TOTAL_DURATION_MINUTES"]))
     env_vars["THRESHOLD"] = int(os.getenv('THRESHOLD', env_vars["THRESHOLD"]))
@@ -54,7 +54,7 @@ def run_simulation():
         if not breaching:
             test_breach = random.uniform(0, 1)
 
-            if test_breach >= env_vars["BREACHING_CHANCE"]:
+            if test_breach >= env_vars["BREACHING_THRESHOLD"]:
                 counter_snapshot = counter
                 breaching = True
                 breaching_points = int(random.uniform(5, env_vars["BREACHING_POINTS_MAX"]))
@@ -75,7 +75,6 @@ def lambda_handler(event, context):
     print("CPU Simulator Lambda")
     print("Created by Paulo Ortolan (paulo.ortolan@gmail.com)")
     print("You can copy, make it better, and make another")
-
 
     print("Context")
     print(event)
