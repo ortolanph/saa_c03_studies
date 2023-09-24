@@ -1,0 +1,126 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "chapter11vpc": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsSupport": true,
+        "EnableDnsHostnames": true,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chapter11-vpc"
+          }
+        ]
+      }
+    },
+    "chapter11subneta": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "chapter11vpc"
+        },
+        "CidrBlock": "10.0.1.0/24",
+        "AvailabilityZone": "eu-west-1a",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chapter11-subnet-a"
+          }
+        ]
+      }
+    },
+    "chapter11subnetb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "chapter11vpc"
+        },
+        "CidrBlock": "10.0.2.0/24",
+        "AvailabilityZone": "eu-west-1b",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chapter11-subnet-b"
+          }
+        ]
+      }
+    },
+    "chapter11subnetc": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "chapter11vpc"
+        },
+        "CidrBlock": "10.0.3.0/24",
+        "AvailabilityZone": "eu-west-1c",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chapter11-subnet-c"
+          }
+        ]
+      }
+    },
+    "chapter11securitygroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "VpcId": {
+          "Ref": "chapter11vpc"
+        },
+        "GroupName": "chapter11-security-group",
+        "GroupDescription": "Group created by Cloudformation",
+        "SecurityGroupIngress": [
+          {
+            "Description": "PostgreSQL",
+            "FromPort": 5432,
+            "ToPort": 5432,
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "SecurityGroupEgress": [
+          {
+            "Description": "Default Outbound Rule",
+            "FromPort": 0,
+            "ToPort": 0,
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chapter11-security-group"
+          }
+        ]
+      }
+    },
+    "chapter11internetgateway": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "chapter11-security-group"
+          }
+        ]
+      }
+    },
+    "chapter11internetgatewayattachment": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "chapter11internetgateway"
+        },
+        "VpcId": {
+          "Ref": "chapter11vpc"
+        }
+      }
+    }
+  }
+}
