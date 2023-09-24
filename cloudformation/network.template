@@ -122,5 +122,37 @@
         }
       }
     }
+  },
+  "Outputs": {
+    "vpcId": {
+      "Description": "The VPC id",
+      "Value": {
+        "Ref": "chapter11vpc"
+      }
+    },
+    "subnetAId": {
+      "Description": "The Subnet A id",
+      "Value": {
+        "Fn::GetAtt": [ "chapter11subneta", "SubnetId" ]
+      }
+    },
+    "subnetBId": {
+      "Description": "The Subnet B id",
+      "Value": {
+        "Fn::GetAtt": [ "chapter11subnetb", "SubnetId" ]
+      }
+    },
+    "subnetCId": {
+      "Description": "The Subnet C id",
+      "Value": {
+        "Fn::GetAtt": [ "chapter11subnetc", "SubnetId" ]
+      }
+    },
+    "securityGroupId": {
+      "Description": "The Security Group Id",
+      "Value": {
+        "Fn::GetAtt": [ "chapter11securitygroup", "GroupId" ]
+      }
+    }
   }
 }
