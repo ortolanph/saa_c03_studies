@@ -8,6 +8,15 @@ resource "aws_budgets_budget" "default_budget" {
   notification {
     comparison_operator        = "GREATER_THAN"
     notification_type          = "ACTUAL"
+    threshold                  = 30
+    threshold_type             = "PERCENTAGE"
+    subscriber_email_addresses = local.subscribers
+  }
+
+
+  notification {
+    comparison_operator        = "GREATER_THAN"
+    notification_type          = "ACTUAL"
     threshold                  = 50
     threshold_type             = "PERCENTAGE"
     subscriber_email_addresses = local.subscribers
