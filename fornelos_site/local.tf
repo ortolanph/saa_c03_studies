@@ -1,0 +1,3 @@
+locals {
+  workspace = "group-game"
+}

@@ -1,0 +1,191 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<!-- Add your site or application content here -->
+<button type="button" onclick="setgame('wouldRather')" id="wouldRather" class="button-game button-utils">Would You
+  Rather
+</button>
+<button type="button" onclick="setgame('neverHave')" id="neverHave" class="button-game button-utils">Never have I ever
+</button>
+<button type="button" onclick="reset()" id="homePage" style="visibility: hidden"
+        class="button-utils button-home button-smaller">home
+</button>
+<button type="button" onclick="getOld()" id="all-answered" class="button-utils button-history button-smaller">History
+</button>
+
+<button type="button" onclick="resetAll()" id="reset-all" styles="visibility: hidden"
+        class="button-utils button-reset button-smaller">Reset
+</button>
+
+
+<div id="current-questions">
+  <p id="game" class="gameName"><b></b></p>
+  <p id="id-questions" class="question"></p>
+  <div class="container-buttons">
+    <button type="button" onclick="getPrevious()" id="previous" style="visibility: hidden"
+            class="button-utils button-previous">previous
+    </button>
+    <button type="button" onclick="getNext()" id="next" style="visibility: hidden" class="button-utils button-next">next
+    </button>
+  </div>
+</div>
+<p id="id-history" style="visibility: hidden"></p>
+
+
+<script>
+  var questions;
+  var oldQuestions = [];
+  var currentQuestions = [];
+  var currentIndex;
+
+</script>
+
+
+<script> function getNext() {
+  var result;
+  if (currentIndex == oldQuestions.length - 1) {
+    result = getQuestion();
+    console.log("next: " + result);
+  } else {
+    result = oldQuestions[currentIndex + 1];
+    currentIndex = currentIndex + 1;
+  }
+  console.log(result);
+  document.getElementById("id-questions").innerHTML = result;
+  document.getElementById("id-questions").style.visibility = "visible";
+  document.getElementById("previous").style.visibility = "visible";
+
+}
+
+function getPrevious() {
+  var result;
+  console.log("currentIndex");
+  result = oldQuestions[currentIndex - 1];
+  currentIndex = currentIndex - 1;
+  if (currentIndex == 0) {
+    document.getElementById("previous").style.visibility = "hidden";
+  }
+  console.log(result)
+  document.getElementById("id-questions").innerHTML = result;
+}
+
+function getOld() {
+  document.getElementById("id-history").innerHTML = oldQuestions.join("<br>");
+  document.getElementById("reset-all").style.visibility = "visible";
+  document.getElementById("id-history").style.visibility = "visible";
+  document.getElementById("current-questions").style.display = "none";
+}
+
+function setgame(gameName) {
+  document.getElementById("current-questions").style.display = "block";
+
+  document.getElementById("id-history").style.visibility = "hidden";
+  document.getElementById("reset-all").style.visibility = "hidden";
+  var gameLabel = "";
+  switch (gameName) {
+    case "wouldRather":
+      gameLabel = "would you rather...";
+      break;
+    case  "neverHave":
+      gameLabel = "Never have I ever...";
+      break;
+  }
+
+  document.getElementById("game").innerHTML = "<b>" + gameLabel + "</b>";
+  readFile(gameName);
+  currentQuestions = [];
+  currentIndex = 0;
+  document.getElementById("wouldRather").style.visibility = "hidden";
+  document.getElementById("neverHave").style.visibility = "hidden";
+  document.getElementById("homePage").style.visibility = "visible";
+  document.getElementById("game").style.visibility = "visible";
+  document.getElementById("id-questions").style.visibility = "visible";
+  document.getElementById("previous").style.visibility = "hidden";
+  document.getElementById("next").style.visibility = "visible";
+}
+
+function resetAll() {
+  oldQuestions = [];
+  currentQuestions = [];
+  document.getElementById("id-questions").innerHTML = "";
+  document.getElementById("reset-all").style.visibility = "hidden";
+  reset();
+
+}
+
+function reset() {
+  document.getElementById("id-history").style.visibility = "hidden";
+  document.getElementById("wouldRather").style.visibility = "visible";
+  document.getElementById("neverHave").style.visibility = "visible";
+  document.getElementById("homePage").style.visibility = "hidden";
+  document.getElementById("game").style.visibility = "hidden";
+  document.getElementById("id-questions").style.visibility = "hidden";
+  document.getElementById("next").style.visibility = "hidden";
+  document.getElementById("previous").style.visibility = "hidden";
+  document.getElementById("reset-all").style.visibility = "hidden";
+}
+
+function getQuestion() {
+  console.log("questions.size " + (questions.length));
+  if (questions.length > 0) {
+    var i = Math.floor(Math.random() * (questions.length));
+    console.log("random number: " + i);
+    console.log(questions[i])
+    var result = questions[i];
+    questions.splice(i, 1);
+    oldQuestions.push(result);
+    currentIndex = oldQuestions.length - 1;
+    return result;
+  } else {
+    return "There are no more...."
+  }
+}
+
+function readFile(game) {
+  var path;
+  if (game == "neverHave") {
+    path = "resources/neverHave";
+  } else if (game = "wouldRather") {
+    path = "resources/wouldYouRather";
+  }
+
+  fetch(path).then(function (res) {
+    return res.text();
+  })
+    .then(function (data) {
+      const lines = data.split('\n');
+      questions = lines;
+      questions.splice(questions.length - 1, 1);
+      console.log("from the file: " + questions);
+      console.log("from the file size: " + questions.length);
+      //show first question
+      document.getElementById("id-questions").innerHTML = getQuestion();
+      console.log(data);
+    });
+} </script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "SourceBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "ortolan-my-sites",
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "Tags": [
+          {
+            "Key": "project",
+            "Value": "ortosites"
+          }
+        ]
+      }
+    },
+    "SourceBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "SourceBucket"
+        },
+        "PolicyDocument": {
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": "s3:GetObject",
+          "Resources": [
+            {"Fn::Sub": "arn:aws:s3:::${SourceBucket}/*"},
+          ]
+        }
+      }
+    }
+  }
+}

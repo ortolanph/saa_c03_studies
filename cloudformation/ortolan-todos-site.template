@@ -1,0 +1,76 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "OrtolanTodosBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "ortolan-todos",
+        "MetricsConfigurations": [
+          {
+            "Id": "EntireBucket"
+          }
+        ],
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": false,
+          "BlockPublicPolicy": false,
+          "IgnorePublicAcls": false,
+          "RestrictPublicBuckets": false
+        },
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html"
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "Tags": [
+          {
+            "Key": "project",
+            "Value": "ortosites"
+          },
+          {
+            "Key": "site",
+            "Value": "ortolan-todo"
+          }
+        ]
+      }
+    },
+    "OrtolanTodosBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "OrtolanTodosBucket"
+        },
+        "PolicyDocument": {
+          "Statement": {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "S3:GetObject",
+            "Resource": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:s3:::",
+                  {
+                    "Ref": "OrtolanTodosBucket"
+                  },
+                  "/*"
+                ]
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "WebsiteURL": {
+      "Value": {
+        "Fn::GetAtt": [
+          "OrtolanTodosBucket",
+          "WebsiteURL"
+        ]
+      },
+      "Description": "Meu site maroto"
+    }
+  }
+}

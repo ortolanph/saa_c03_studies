@@ -1,0 +1,14 @@
+{
+  "Id": {
+    "N": "IDENTIFIER"
+  },
+  "BookName": {
+    "S": "BOOK_NAME"
+  },
+  "LastName": {
+    "S": "LAST_NAME"
+  },
+  "FirstName": {
+    "S": "FIRST_NAME"
+  }
+}

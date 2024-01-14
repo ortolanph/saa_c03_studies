@@ -1,0 +1,57 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Resources": {
+    "FornelosBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "fornelos-group-game",
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": false,
+          "BlockPublicPolicy": false,
+          "IgnorePublicAcls": false,
+          "RestrictPublicBuckets": false
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "WebsiteConfiguration": {
+          "IndexDocument": "index.html"
+        },
+        "Tags": [
+          {
+            "Key": "project",
+            "Value": "ortosites"
+          },
+          {
+            "Key": "site",
+            "Value": "fornelos-group-game"
+          }
+        ]
+      }
+    },
+    "FornelosBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "FornelosBucket"
+        },
+        "PolicyDocument": {
+          "Statement": {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "S3:GetObject",
+            "Resource": {
+              "Fn::Sub": "arn:aws::s3:::${FornelosBucket}/*"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "WebsiteURL": {
+      "Value": { "Fn::GetAtt": ["FornelosBucket", "WebsiteURL"] },
+      "Description": "URL para o jogo maroto do Fornelos"
+    }
+  }
+}
