@@ -1,0 +1,64 @@
+formatter: "markdown"
+
+header-from: main.tf
+
+recursive:
+  enabled: true
+  path: modules
+
+sections:
+  show:
+    - all
+
+content: |-
+  # Costs
+  
+  Creates a Simple Budget.
+  
+  ## Notifications
+  
+  **Subscribers**:
+  
+  * paulo.ortolan@gmail.com
+  * paulo.ortolan.pt@gmail.com
+  * paulo.ortolan.work@gmail.com
+  
+  **Budget UNIT**: **USD**
+  
+  | # | Comparison | Type | Threshold |
+  |:-:|:----------:|:----:|:---------:|
+  | 1 | GREATHER_THAN | ACTUAL | 30% |
+  | 2 | GREATHER_THAN | ACTUAL | 50% |
+  | 3 | GREATHER_THAN | ACTUAL | 80% |
+  
+  {{ .Providers }}
+  {{ .Resources }}
+  {{ .Inputs }}
+  {{ .Outputs }}
+
+output:
+  file: "README.md"
+  mode: replace
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->    
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: false
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: false
+  html: false
+  indent: 2
+  lockfile: false
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
