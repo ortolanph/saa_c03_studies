@@ -56,3 +56,20 @@ source_profile=saa_c03_studies
 aws_access_key_id = MYAWESOME_CREDENTIAL
 aws_secret_access_key = MY_AWESOME_SECRET_ACCESS_KEY_XXXXXXXXXXX
 ```
+
+## Checkov Tests
+
+**Simple**
+```shell
+checkov --quiet -s -d .
+```
+
+**With JUnit Output**
+```shell
+checkov --quiet -s -o junitxml -d .
+```
+
+**With Github Failed Only Output**
+```shell
+checkov --quiet -s -o github_failed_only -d .
+```

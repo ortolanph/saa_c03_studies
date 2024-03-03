@@ -2,7 +2,7 @@ formatter: "markdown"
 
 version: ">= 1.4.6, < 1.5.6"
 
-header-from: main.tf
+header-from: main.tf.tf
 
 recursive:
   enabled: false
