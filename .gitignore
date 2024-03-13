@@ -3,3 +3,4 @@
 .terraform
 *.url
 .idea
+**/venv

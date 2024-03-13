@@ -1,3 +1,3 @@
 locals {
-  workspace = "ttl-records-"
+  workspace = "ttl-records"
 }

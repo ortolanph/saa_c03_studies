@@ -24,17 +24,7 @@ resource "aws_dynamodb_table" "nosql_database" {
     read_capacity   = 10
     write_capacity  = 10
   }
-
-  attribute {
-    name = "LastName"
-    type = "S"
-  }
-
-  attribute {
-    name = "FirstName"
-    type = "S"
-  }
-
+  
   ttl {
     attribute_name = "ExpiresAt"
     enabled        = "true"

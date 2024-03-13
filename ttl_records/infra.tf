@@ -1,5 +1,5 @@
 module "dynamo" {
-  source = "modules/dynamodb"
+  source = "./modules/dynamodb"
 
   workspace = local.workspace
 }
