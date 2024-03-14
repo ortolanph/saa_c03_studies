@@ -1,6 +1,7 @@
 import csv
 import random
 import time
+from datetime import datetime, timedelta
 
 import boto3
 
@@ -8,7 +9,7 @@ stamped_data = []
 
 
 def get_table():
-    session = (boto3.Session(profile_name='saa_c03_studies'))
+    session = (boto3.Session(profile_name='saa_c03_studies', region_name="eu-west-1"))
     resource = session.resource("dynamodb")
     table = resource.Table("ttl-records-books-database")
 
@@ -28,11 +29,20 @@ def import_data():
         reader = csv.DictReader(csvfile)
 
         for row in reader:
-            current_time = int(time.time())
-            random_time = random.randint(15, 120)
-            row["ExpiredAt"] = current_time + (random_time * 60)
+            random_minutes = random.randint(15, 120)
+            current_time = datetime.now()
+            expired_at = current_time + timedelta(minutes=random_minutes)
+
+            row["ExpiredAt"] = int(time.mktime(expired_at.timetuple()))
             row["Id"] = int(row["Id"])
+
+            print(f"-------------------------------------------------------")
+            print(f"Inserting book {row['Title']}")
+            print(f"-------------------------------------------------------")
+            print(f"Current Time at {str(current_time)}")
+            print(f"Expires at {str(expired_at)}")
             stamped_data.append(row)
+            print(f"-------------------------------------------------------")
 
     for stamped in stamped_data:
         print(stamped.keys())
