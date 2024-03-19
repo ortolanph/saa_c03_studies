@@ -1,8 +1,8 @@
 resource "aws_dynamodb_table" "nosql_database" {
   name           = "${var.workspace}-books-database"
   billing_mode   = "PROVISIONED"
-  read_capacity  = "1"
-  write_capacity = "1"
+  read_capacity  = "20"
+  write_capacity = "10"
   hash_key       = "Id"
   range_key      = "Title"
   stream_enabled = false
@@ -21,7 +21,7 @@ resource "aws_dynamodb_table" "nosql_database" {
     hash_key        = "Title"
     name            = "TitleIndex"
     projection_type = "ALL"
-    read_capacity   = 10
+    read_capacity   = 20
     write_capacity  = 10
   }
 
