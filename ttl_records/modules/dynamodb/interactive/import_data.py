@@ -31,16 +31,16 @@ def import_data():
         for row in reader:
             random_minutes = random.randint(15, 120)
             current_time = datetime.now()
-            expired_at = current_time + timedelta(minutes=random_minutes)
+            expires_at = current_time + timedelta(minutes=random_minutes)
 
-            row["ExpiredAt"] = int(time.mktime(expired_at.timetuple()))
+            row["ExpiresAt"] = int(time.mktime(expires_at.timetuple()))
             row["Id"] = int(row["Id"])
 
             print(f"-------------------------------------------------------")
             print(f"Inserting book {row['Title']}")
             print(f"-------------------------------------------------------")
             print(f"Current Time at {str(current_time)}")
-            print(f"Expires at {str(expired_at)}")
+            print(f"Expires at {str(expires_at)}")
             stamped_data.append(row)
             print(f"-------------------------------------------------------")
 
